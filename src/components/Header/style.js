@@ -1,28 +1,72 @@
 import styled, { css } from "styled-components";
 
 const isLoggedStyle = {
-    true: css`
+   true: css`
+      height: 190px;
+      border-bottom: 1px solid var(--grey-3);
 
-    `,
-    false: css`
-    
-    `,
-    login: css`
-        nav ul { display: none; }
-        nav { justify-content: center; }
-    `
+      & > div {
+         padding-top: 72px;
+      }
+
+      nav { 
+         height:72px;
+         position: fixed;
+         inset: 0;
+
+         &::before {
+            content: "";
+            width: 100vw;
+            height: 1px;
+            position: absolute;
+            bottom: 0;
+            left: -9%;
+            background-color: var(--grey-3);
+
+            @media (max-width:768px) {
+               left: -2.6%;
+            }
+         }
+      }
+
+      .header_children { 
+         height: 118px;
+      }
+   `,
+   login: css`
+      nav ul { display: none; }
+      nav { justify-content: center; }
+   `
 }
 
 export const StyledHeader = styled.header`
     height: 72px;
-   
-    nav {
-        height: 100%;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 20px;
-    }
 
-    ${({ isLogged, loginPage }) => loginPage ? isLoggedStyle["login"] : isLoggedStyle[isLogged]}
+   & > div {
+      height: 100%;
+   }
+   
+   nav {
+      height: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+   }
+
+   .header_children {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      h1 {
+         color: var(--grey-0);
+      }
+
+      p {
+         color: var(--grey-1);
+      }
+   }
+
+   ${({ isLogged, loginPage }) => loginPage ? isLoggedStyle["login"] : isLoggedStyle[isLogged]}
 `

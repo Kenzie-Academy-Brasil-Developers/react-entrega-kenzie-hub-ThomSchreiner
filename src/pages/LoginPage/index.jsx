@@ -20,8 +20,6 @@ export function LoginPage({ isLogged, setIsLogged, setUser }) {
    } = useForm({ resolver: yupResolver(schema) })
 
    function onSubmit(data) {
-      console.log(data)
-
       api.post("/sessions", data)
          .then((resp) => {
             setUser(resp.data.user)
@@ -36,7 +34,12 @@ export function LoginPage({ isLogged, setIsLogged, setUser }) {
 
    return (
       <>
-         <Header isLogged={isLogged} setIsLogged={setIsLogged} loginPage="login" />
+         <Header
+            isLogged={isLogged}
+            setIsLogged={setIsLogged}
+            loginPage="login"
+            className="container small"
+         />
          <DivContainer className="container small">
             <h3 className="title three">Login</h3>
             <form onSubmit={handleSubmit(onSubmit)}>

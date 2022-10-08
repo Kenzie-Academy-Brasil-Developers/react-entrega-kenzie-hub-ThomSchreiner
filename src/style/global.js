@@ -39,9 +39,9 @@ ul, ol, li {
 }
 
 .container {
-    width: 100%;
+    width: 85%;
     max-width: 1200px;
-    margin: 0 50px;
+    margin: 0 auto;
 }
 
 .container.small {
@@ -50,7 +50,7 @@ ul, ol, li {
 
 @media (max-width: 768px) {
     .container {
-        margin: 0 15px;
+        width: 95%;
     }
 }
 

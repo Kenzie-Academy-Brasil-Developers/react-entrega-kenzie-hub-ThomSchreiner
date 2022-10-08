@@ -60,7 +60,7 @@ export function SignupPage({ isLogged }) {
 
    return (
       <>
-         <Header isLogged={isLogged} />
+         <Header isLogged={isLogged} className="container small" />
          <DivContainer className="container small">
             <h1 className="title one">Crie sua conta</h1>
             <span className="text three">Rapido e grátis, vamos nessa</span>
