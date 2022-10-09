@@ -10,6 +10,7 @@ export const GlobalStyle = createGlobalStyle`
     border: none;
     outline: none;
     font-family: 'Inter', sans-serif;
+    transition: 0.15s;
 }
 
 img {
@@ -27,12 +28,13 @@ ul, ol, li {
 :root {
     --primary: #FF577F;
     --primary-focus: #FF427F;
-    --primary-negative: #59323F;
+    --primary-disabled: #59323F;
     --grey-4: #121214;
     --grey-3: #212529;
     --grey-2: #343B41;
     --grey-1: #868E96;
     --grey-0: #F8F9FA;
+    --white: #FFFFFF;
     --success: #3FE864;
     --negative: #E83F5B;
     --shadow: rgba(0, 0, 0, 0.25);

@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom"
 import logo from "../../assets/Logo.svg"
+import { StyledButton } from "../../style/button"
 import { StyledHeader } from "./style"
 
 export function Header({ isLogged, setIsLogged, loginPage, className, children }) {
@@ -20,11 +21,27 @@ export function Header({ isLogged, setIsLogged, loginPage, className, children }
                <ul>
                   {isLogged ? (
                      <li>
-                        <button onClick={logOut}>Sair</button>
+                        <StyledButton
+                           color="grey"
+                           heigth="small"
+                           isActive={true}
+                           type="button"
+                           onClick={logOut}
+                        >
+                           Sair
+                        </StyledButton>
                      </li>
                   ) : (
                      <li>
-                        <button onClick={() => navigate(-1)}>voltar</button>
+                        <StyledButton
+                           color="grey"
+                           heigth="small"
+                           isActive={true}
+                           type="button"
+                           onClick={() => navigate(-1)}
+                        >
+                           voltar
+                        </StyledButton>
                      </li>
                   )}
                </ul>

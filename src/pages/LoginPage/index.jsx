@@ -6,6 +6,8 @@ import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
 import { api } from "./../../services/api"
 import { toast } from "react-toastify"
+import { StyledInput } from "../../components/Input/style"
+import { StyledButton } from "../../style/button"
 
 export function LoginPage({ isLogged, setIsLogged, setUser }) {
    const navigate = useNavigate()
@@ -43,27 +45,23 @@ export function LoginPage({ isLogged, setIsLogged, setUser }) {
          <DivContainer className="container small">
             <h3 className="title three">Login</h3>
             <form onSubmit={handleSubmit(onSubmit)}>
-               <label className="text three" htmlFor="email">
-                  Email
-               </label>
-               <input
-                  id="email"
+               <StyledInput
+                  name={["Email", "email"]}
                   type="email"
                   placeholder="Digite seu email"
-                  {...register("email")}
+                  register={register}
+                  errors={errors}
                />
-
-               <label className="text three" htmlFor="password">
-                  Senha
-               </label>
-               <input
-                  id="password"
+               <StyledInput
+                  name={["Senha", "password"]}
                   type="password"
                   placeholder="Digite sua senha"
-                  {...register("password")}
+                  register={register}
+                  errors={errors}
                />
-
-               <button type="submit">Entrar</button>
+               <StyledButton color="primary" heigth="default" isActive={true} type="submit">
+                  Entrar
+               </StyledButton>
             </form>
             <span className="text three bold">Ainda não possui uma conta?</span>
             <Link to="/register">Cadastre-se</Link>

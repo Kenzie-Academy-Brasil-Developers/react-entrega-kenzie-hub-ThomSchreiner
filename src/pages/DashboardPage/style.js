@@ -1,7 +1,7 @@
 import styled from "styled-components"
 
 export const DivContainer = styled.div`
-   margin-top: 37px;
+   margin: 37px auto;
    color: var(--grey-0);
 
    h1 {

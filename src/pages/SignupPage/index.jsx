@@ -7,9 +7,12 @@ import { StyledInput } from "../../components/Input/style"
 import { api } from "./../../services/api"
 import { toast } from "react-toastify"
 import { useNavigate } from "react-router-dom"
+import { StyledButton } from "./../../style/button"
+import { useEffect, useState } from "react"
 
 export function SignupPage({ isLogged }) {
    const navigate = useNavigate()
+   const [isActive, setIsActive] = useState(false)
 
    const schema = yup.object({
       name: yup.string().required("Nome obrigatório!"),
@@ -37,6 +40,7 @@ export function SignupPage({ isLogged }) {
 
    function onSubmit(data) {
       console.log(data)
+
       api.post("/users", data)
          .then((resp) => {
             toast.success("Cadastro realizado com sucesso!")
@@ -44,6 +48,11 @@ export function SignupPage({ isLogged }) {
          })
          .catch((err) => toast.error(err.response.data.message))
    }
+
+   useEffect(() => {
+      setIsActive(!Object.keys(errors).length)
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+   }, [Object.keys(errors).length])
 
    const inputsGuide = [
       { name: ["Nome", "name"], type: "text", placeholder: "Digite aqui seu nome" },
@@ -75,13 +84,24 @@ export function SignupPage({ isLogged }) {
                      errors={errors}
                   />
                ))}
-               <select {...register("course_module")}>
+
+               <label className="text three" htmlFor="course_module">
+                  Selecionar módulo
+               </label>
+               <select className="text one" id="course_module" {...register("course_module")}>
                   {["Escolha um", "1º", "2º", "3º", "4º", "5º", "6º"].map((count, i) => (
                      <option key={i} value={i ? `${count} Módulo` : ""}>{`${count} Módulo`}</option>
                   ))}
                </select>
-
-               <button type="submit">Cadastrar</button>
+               <StyledButton
+                  color="primary"
+                  heigth="default"
+                  isActive={isActive}
+                  disabled={!isActive}
+                  type="submit"
+               >
+                  Cadastrar
+               </StyledButton>
             </form>
          </DivContainer>
       </>
