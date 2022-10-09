@@ -3,13 +3,14 @@ import logo from "../../assets/Logo.svg"
 import { StyledButton } from "../../style/button"
 import { StyledHeader } from "./style"
 
-export function Header({ isLogged, setIsLogged, loginPage, className, children }) {
+export function Header({ isLogged, setIsLogged, loginPage, className, setUser, children }) {
    const navigate = useNavigate()
 
    function logOut() {
       setIsLogged(false)
       localStorage.removeItem("@KenzieHubToken")
       localStorage.removeItem("@KenzieHubUserId")
+      setUser({})
       navigate("/", { replace: true })
    }
 

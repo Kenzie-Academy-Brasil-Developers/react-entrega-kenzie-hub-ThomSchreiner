@@ -13,6 +13,7 @@ import { useEffect, useState } from "react"
 export function SignupPage({ isLogged }) {
    const navigate = useNavigate()
    const [isActive, setIsActive] = useState(false)
+   const [isLoading, setIsLoading] = useState(false)
 
    const schema = yup.object({
       name: yup.string().required("Nome obrigatório!"),
@@ -23,6 +24,7 @@ export function SignupPage({ isLogged }) {
          .matches(/[A-Z]/, "Deve conter ao menos 1 letra maiúscula")
          .matches(/[a-z]/, "Deve conter ao menos 1 letra minuscula")
          .matches(/(\d)/, "Deve conter ao menos 1 número")
+         .matches(/(\W)|_/, "Deve conter ao menos 1 caractere especial")
          .matches(/.{8,}/, "Deve ter no mínimo 8 dígitos"),
       confirmPassword: yup
          .string()
@@ -39,14 +41,17 @@ export function SignupPage({ isLogged }) {
    } = useForm({ resolver: yupResolver(schema) })
 
    function onSubmit(data) {
-      console.log(data)
-
+      setIsLoading(true)
       api.post("/users", data)
          .then((resp) => {
             toast.success("Cadastro realizado com sucesso!")
+            setIsLoading(false)
             navigate("/")
          })
-         .catch((err) => toast.error(err.response.data.message))
+         .catch((err) => {
+            toast.error(err.response.data.message)
+            setIsLoading(false)
+         })
    }
 
    useEffect(() => {
@@ -98,6 +103,7 @@ export function SignupPage({ isLogged }) {
                   heigth="default"
                   isActive={isActive}
                   disabled={!isActive}
+                  className={isLoading ? "loading" : ""}
                   type="submit"
                >
                   Cadastrar

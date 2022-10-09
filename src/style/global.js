@@ -103,4 +103,33 @@ ul, ol, li {
     font-style: italic;
 }
 
+/* LOADING */
+.loading {
+   position: relative;
+   inset: 0;
+}
+
+.loading::before {
+   content: "";
+   position: absolute;
+   right: 10px;
+   top: 27%;
+   width: 15px;
+   height: 15px;
+   border: 4px solid var(--white);
+   border-top: 4px solid var(--grey-1);
+   border-radius: 50%;
+   animation: rotateAnivation 0.1s linear infinite;
+
+}
+
+@keyframes rotateAnivation {
+   from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 `

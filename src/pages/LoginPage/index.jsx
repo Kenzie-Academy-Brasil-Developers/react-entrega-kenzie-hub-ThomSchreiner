@@ -8,9 +8,11 @@ import { api } from "./../../services/api"
 import { toast } from "react-toastify"
 import { StyledInput } from "../../components/Input/style"
 import { StyledButton } from "../../style/button"
+import { useState } from "react"
 
 export function LoginPage({ isLogged, setIsLogged, setUser }) {
    const navigate = useNavigate()
+   const [isLoading, setIsLoading] = useState(false)
    const schema = yup.object({
       email: yup.string().required("Email obrigatório!"),
       password: yup.string().required("Senha obrigatória!"),
@@ -22,16 +24,21 @@ export function LoginPage({ isLogged, setIsLogged, setUser }) {
    } = useForm({ resolver: yupResolver(schema) })
 
    function onSubmit(data) {
+      setIsLoading(true)
       api.post("/sessions", data)
          .then((resp) => {
             setUser(resp.data.user)
             localStorage.setItem("@KenzieHubToken", resp.data.token)
             localStorage.setItem("@KenzieHubUserId", resp.data.user.id)
             setIsLogged(true)
+            setIsLoading(false)
             toast.success("Login realizado com sucesso!")
             navigate("/dashboard")
          })
-         .catch((err) => toast.error(err.response.data.message))
+         .catch((err) => {
+            toast.error(err.response.data.message)
+            setIsLoading(false)
+         })
    }
 
    return (
@@ -59,7 +66,13 @@ export function LoginPage({ isLogged, setIsLogged, setUser }) {
                   register={register}
                   errors={errors}
                />
-               <StyledButton color="primary" heigth="default" isActive={true} type="submit">
+               <StyledButton
+                  className={isLoading ? "loading" : ""}
+                  color="primary"
+                  heigth="default"
+                  isActive={true}
+                  type="submit"
+               >
                   Entrar
                </StyledButton>
             </form>
