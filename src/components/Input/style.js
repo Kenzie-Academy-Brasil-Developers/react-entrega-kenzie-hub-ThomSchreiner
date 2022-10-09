@@ -32,6 +32,10 @@ export const StyledInput = styled(Input)`
          }
       }
 
+      .input_red {
+         border-color: var(--negative);
+      }
+
       svg {
          position: absolute;
          right: 10px;
@@ -39,7 +43,46 @@ export const StyledInput = styled(Input)`
          transform: translateY(-50%);
          color: var(--negative);
          font-size: 24px;
-         cursor: pointer;
+      }
+
+      span {
+         display: none;
+         position: absolute;
+         right: -10px;
+         top: 0;
+         transform: translate(100%, 25%);
+         background-color: var(--negative);
+         color: white;
+         padding: 5px 10px;
+         margin: 0;
+         border-radius: 4px;
+         z-index: 1;
+      }
+
+      span + svg {
+         display: none;
+         right: -20px;
+         top: 24%;
+         transform: rotate(45deg);
+         font-size: 16px;
+        
+      }
+
+      input:focus + svg + span, input:focus + svg + span + svg {
+         display: inline-block;
+      }
+
+      @media (max-width:768px) {
+         span {
+            right: 0;
+            top: -10px;
+            transform: translate(0, -100%);
+         }
+
+         span + svg {
+            right: 14px;
+            top: -18px;
+         }
       }
    }
 `

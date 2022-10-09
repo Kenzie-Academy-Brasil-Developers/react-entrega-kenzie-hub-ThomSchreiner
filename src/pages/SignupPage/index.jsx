@@ -19,16 +19,16 @@ export function SignupPage({ isLogged }) {
       email: yup.string().required("Email obrigatório!").email("Digite um email válido!"),
       password: yup
          .string()
-         .required("Senha obrigatório!")
+         .required("Senha obrigatória!")
          .matches(/[A-Z]/, "Deve conter ao menos 1 letra maiúscula")
          .matches(/[a-z]/, "Deve conter ao menos 1 letra minuscula")
          .matches(/(\d)/, "Deve conter ao menos 1 número")
          .matches(/.{8,}/, "Deve ter no mínimo 8 dígitos"),
       confirmPassword: yup
          .string()
-         .required("Confirmação de senha obrigatório!")
+         .required("Confirmação de senha obrigatória!")
          .oneOf([yup.ref("password")], "As senhas devem ser iguais"),
-      bio: yup.string().required("Bio obrigatório!"),
+      bio: yup.string().required("Bio obrigatória!"),
       contact: yup.string().required("Contato obrigatório!").min(11, "Digite seu número com DDD"),
       course_module: yup.string().required("Módulo obrigatório!"),
    })
@@ -73,7 +73,7 @@ export function SignupPage({ isLogged }) {
          <DivContainer className="container small">
             <h1 className="title one">Crie sua conta</h1>
             <span className="text three">Rapido e grátis, vamos nessa</span>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
                {inputsGuide.map((input) => (
                   <StyledInput
                      key={input.placeholder}
@@ -89,8 +89,8 @@ export function SignupPage({ isLogged }) {
                   Selecionar módulo
                </label>
                <select className="text one" id="course_module" {...register("course_module")}>
-                  {["Escolha um", "1º", "2º", "3º", "4º", "5º", "6º"].map((count, i) => (
-                     <option key={i} value={i ? `${count} Módulo` : ""}>{`${count} Módulo`}</option>
+                  {["1º", "2º", "3º", "4º", "5º", "6º"].map((count, i) => (
+                     <option key={i} value={`${count} Módulo`}>{`${count} Módulo`}</option>
                   ))}
                </select>
                <StyledButton

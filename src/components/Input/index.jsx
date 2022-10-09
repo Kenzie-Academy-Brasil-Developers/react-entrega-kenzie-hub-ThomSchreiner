@@ -1,8 +1,9 @@
 import { BiErrorCircle } from "react-icons/bi"
+import { RiCheckboxBlankFill } from "react-icons/ri"
 
 export function Input({ className, name, type, placeholder, register, errors }) {
    const [namePtBr, nameEng] = name
-
+   console.log()
    return (
       <div className={className}>
          <label className="text three" htmlFor={nameEng}>
@@ -10,14 +11,19 @@ export function Input({ className, name, type, placeholder, register, errors }) 
          </label>
          <div>
             <input
-               className="text one"
+               className={`text one ${errors[nameEng]?.message ? "input_red" : ""}`}
                id={nameEng}
                type={type}
                placeholder={placeholder}
                {...register(nameEng)}
             />
-            {/* <BiErrorCircle /> */}
-            {/* <span className="text three">{errors[name]?.message}</span> */}
+            {errors[nameEng]?.message && (
+               <>
+                  <BiErrorCircle />
+                  <span className="text three">{errors[nameEng]?.message}</span>
+                  <RiCheckboxBlankFill />
+               </>
+            )}
          </div>
       </div>
    )

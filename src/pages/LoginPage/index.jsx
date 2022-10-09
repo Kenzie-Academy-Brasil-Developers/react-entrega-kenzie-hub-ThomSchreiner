@@ -13,7 +13,7 @@ export function LoginPage({ isLogged, setIsLogged, setUser }) {
    const navigate = useNavigate()
    const schema = yup.object({
       email: yup.string().required("Email obrigatório!"),
-      password: yup.string().required("Senha obrigatória"),
+      password: yup.string().required("Senha obrigatória!"),
    })
    const {
       register,
