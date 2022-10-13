@@ -19,6 +19,7 @@ img {
 
 button {
     cursor: pointer;
+    background-color: transparent;
 }
 
 ul, ol, li {
@@ -42,7 +43,7 @@ ul, ol, li {
 
 .container {
     width: 85%;
-    max-width: 1200px;
+    max-width: 900px;
     margin: 0 auto;
 }
 

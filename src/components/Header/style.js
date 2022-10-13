@@ -13,25 +13,20 @@ const isLoggedStyle = {
          height:72px;
          position: fixed;
          inset: 0;
+         background-color: var(--grey-4);
 
          &::before {
             content: "";
-            width: 100vw;
+            width: 200vw;
             height: 1px;
             position: absolute;
             bottom: 0;
-            left: -9%;
+            left: -100vw;
             background-color: var(--grey-3);
-
-            @media (max-width:768px) {
-               left: -2.6%;
-            }
          }
       }
 
-      .header_children { 
-         height: 118px;
-      }
+      .header_children { height: 118px; }
    `,
    login: css`
       nav ul { display: none; }

@@ -10,10 +10,10 @@ import { useNavigate } from "react-router-dom"
 import { StyledButton } from "./../../style/button"
 import { useEffect, useState } from "react"
 
-export function SignupPage({ isLogged }) {
+export function SignupPage() {
    const navigate = useNavigate()
    const [isActive, setIsActive] = useState(false)
-   const [isLoading, setIsLoading] = useState(false)
+   const [isLoadingBtn, setIsLoadingBtn] = useState(false)
 
    const schema = yup.object({
       name: yup.string().required("Nome obrigatório!"),
@@ -40,18 +40,17 @@ export function SignupPage({ isLogged }) {
       formState: { errors },
    } = useForm({ resolver: yupResolver(schema) })
 
-   function onSubmit(data) {
-      setIsLoading(true)
-      api.post("/users", data)
-         .then((resp) => {
-            toast.success("Cadastro realizado com sucesso!")
-            setIsLoading(false)
-            navigate("/")
-         })
-         .catch((err) => {
-            toast.error(err.response.data.message)
-            setIsLoading(false)
-         })
+   async function onSubmit(data) {
+      try {
+         setIsLoadingBtn(true)
+         await api.post("/users", data)
+         toast.success("Cadastro realizado com sucesso!")
+         navigate("/")
+      } catch (error) {
+         toast.error(error.response.data.message)
+      } finally {
+         setIsLoadingBtn(false)
+      }
    }
 
    useEffect(() => {
@@ -74,7 +73,7 @@ export function SignupPage({ isLogged }) {
 
    return (
       <>
-         <Header isLogged={isLogged} className="container small" />
+         <Header className="container small" />
          <DivContainer className="container small">
             <h1 className="title one">Crie sua conta</h1>
             <span className="text three">Rapido e grátis, vamos nessa</span>
@@ -103,7 +102,7 @@ export function SignupPage({ isLogged }) {
                   heigth="default"
                   isActive={isActive}
                   disabled={!isActive}
-                  className={isLoading ? "loading" : ""}
+                  className={isLoadingBtn ? "loading" : ""}
                   type="submit"
                >
                   Cadastrar

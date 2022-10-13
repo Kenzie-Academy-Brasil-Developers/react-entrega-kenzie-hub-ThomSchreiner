@@ -1,16 +1,19 @@
+import { useContext } from "react"
 import { useNavigate } from "react-router-dom"
 import logo from "../../assets/Logo.svg"
+import { UserContext } from "../../contexts/UserContext"
 import { StyledButton } from "../../style/button"
 import { StyledHeader } from "./style"
 
-export function Header({ isLogged, setIsLogged, loginPage, className, setUser, children }) {
+export function Header({ loginPage, className, children }) {
+   const { isLogged, setIsLogged, setUser } = useContext(UserContext)
    const navigate = useNavigate()
 
    function logOut() {
       setIsLogged(false)
       localStorage.removeItem("@KenzieHubToken")
       localStorage.removeItem("@KenzieHubUserId")
-      setUser({})
+      setUser(null)
       navigate("/", { replace: true })
    }
 
@@ -22,25 +25,13 @@ export function Header({ isLogged, setIsLogged, loginPage, className, setUser, c
                <ul>
                   {isLogged ? (
                      <li>
-                        <StyledButton
-                           color="grey"
-                           heigth="small"
-                           isActive={true}
-                           type="button"
-                           onClick={logOut}
-                        >
+                        <StyledButton color="grey" heigth="small" type="button" onClick={logOut}>
                            Sair
                         </StyledButton>
                      </li>
                   ) : (
                      <li>
-                        <StyledButton
-                           color="grey"
-                           heigth="small"
-                           isActive={true}
-                           type="button"
-                           onClick={() => navigate(-1)}
-                        >
+                        <StyledButton color="grey" heigth="small" type="button" onClick={() => navigate(-1)}>
                            voltar
                         </StyledButton>
                      </li>

@@ -4,7 +4,7 @@ import { App } from './App';
 import { GlobalStyle } from './style/global';
 import { BrowserRouter } from 'react-router-dom';
 import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.min.css"
+import "react-toastify/dist/ReactToastify.min.css";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

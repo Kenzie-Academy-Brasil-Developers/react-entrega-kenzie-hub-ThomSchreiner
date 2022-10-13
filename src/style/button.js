@@ -16,9 +16,7 @@ const buttonHeigth = {
       line-height: 28px;
       background-color: var(--grey-3);
       
-      &:hover {
-         background-color: var(--grey-2);
-      }
+      &:hover { background-color: var(--grey-2); }
    `
 }
 
@@ -26,25 +24,19 @@ const buttonColor = {
    primary: css`
       background-color: var(--primary);
       
-      &:hover {
-         background-color: var(--primary-focus);
-      }
+      &:hover { background-color: var(--primary-focus); }
    
    `,
    grey: css`
        background-color: var(--grey-1);
       
-      &:hover {
-         background-color: var(--grey-2);
-      }
+      &:hover { background-color: var(--grey-2); }
    `,
    disabled: css`
       background-color: var(--primary-disabled);
       cursor: no-drop;
       
-      &:hover {
-         background-color: var(--primary-disabled);
-      }
+      &:hover { background-color: var(--primary-disabled); }
 `
 }
 // color="primary" heigth="default" isActive={true}
@@ -53,7 +45,7 @@ export const StyledButton = styled.button`
    border-radius: 4px;
 
    ${({ heigth, color }) => heigth === "default" && buttonColor[color]}
-   ${({ isActive }) => !isActive && buttonColor.disabled}
+   ${({ isActive = true }) => !isActive && buttonColor.disabled}
    ${({ heigth }) => buttonHeigth[heigth]}
 
 `
