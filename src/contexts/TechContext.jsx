@@ -20,5 +20,16 @@ export function TechProvider({ children }) {
       }
    }
 
-   return <TechContext.Provider value={{ createTech }}>{children}</TechContext.Provider>
+   async function removeTech(id) {
+      try {
+         await api.delete(`/users/techs/${id}`)
+         const resp = await api.get("/profile")
+         setUser(resp.data)
+         toast.success("Tecnologia deletada com sucesso!")
+      } catch (error) {
+         toast.error(error.response.data.message)
+      }
+   }
+
+   return <TechContext.Provider value={{ createTech, removeTech }}>{children}</TechContext.Provider>
 }

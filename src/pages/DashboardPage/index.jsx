@@ -1,11 +1,11 @@
 import { useContext, useState } from "react"
 import { Header } from "../../components/Header"
 import { UserContext } from "../../contexts/UserContext"
-import { CardItem, DivContainer } from "./style"
-import { FaRegTrashAlt } from "react-icons/fa"
+import { DivContainer } from "./style"
 import { IoMdAdd } from "react-icons/io"
 import { StyledButton } from "../../style/button"
 import { ModalAddTech } from "../../components/Modal/ModalAddTech"
+import { TechCard } from "./components/TechCard"
 
 export function DashboardPage() {
    const { user } = useContext(UserContext)
@@ -32,13 +32,7 @@ export function DashboardPage() {
             </div>
             <ul>
                {user.techs.map((tech) => (
-                  <CardItem key={tech.id}>
-                     <p className="title three">{tech.title}</p>
-                     <p className="text three">{tech.status}</p>
-                     <button>
-                        <FaRegTrashAlt />
-                     </button>
-                  </CardItem>
+                  <TechCard key={tech.id} tech={tech} />
                ))}
             </ul>
          </DivContainer>

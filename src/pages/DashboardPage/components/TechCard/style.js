@@ -1,0 +1,28 @@
+import styled from "styled-components";
+
+export const CardItem = styled.li`
+   height: 50px;
+   padding: 0 20px;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   gap: 25px;
+   background-color: var(--grey-4);
+   border-radius: 4px;
+
+   &:hover {
+      background-color: var(--grey-2);
+      
+      p + p { color: var(--grey-0); }
+   }
+
+   p + p {
+      flex: 1 1 auto;
+      text-align: end;
+      color: var(--grey-1);
+   }
+
+   button {
+      color: var(--white);
+   }
+`
