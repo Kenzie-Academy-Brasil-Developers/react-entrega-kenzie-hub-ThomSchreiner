@@ -1,4 +1,5 @@
 import { createContext, useContext } from "react"
+import { toast } from "react-toastify"
 import { api } from "../services/api"
 import { UserContext } from "./UserContext"
 
@@ -7,14 +8,14 @@ export const TechContext = createContext({})
 export function TechProvider({ children }) {
    const { setUser } = useContext(UserContext)
 
-   async function createTech(tech) {
+   async function createTech(data) {
       try {
-         console.log(tech)
-         // await api.post("/users/techs", tech)
-         // const resp = await api.get("/profile")
-         // setUser(resp.data)
+         await api.post("/users/techs", data)
+         const resp = await api.get("/profile")
+         setUser(resp.data)
+         toast.success("Tecnologia adicionada com sucesso!")
       } catch (error) {
-         console.log(error)
+         toast.error(error.response.data.message)
       }
    }
 

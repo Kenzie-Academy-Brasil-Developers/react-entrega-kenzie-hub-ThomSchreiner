@@ -35,10 +35,11 @@ ul, ol, li {
     --grey-2: #343B41;
     --grey-1: #868E96;
     --grey-0: #F8F9FA;
+    --grey-4-50: rgba(18, 18, 20, 0.5);
+    --shadow: rgba(0, 0, 0, 0.25);
     --white: #FFFFFF;
     --success: #3FE864;
     --negative: #E83F5B;
-    --shadow: rgba(0, 0, 0, 0.25);
 }
 
 .container {
