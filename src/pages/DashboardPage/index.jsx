@@ -36,9 +36,13 @@ export function DashboardPage() {
                </StyledButton>
             </div>
             <ul>
-               {user.techs.map((tech) => (
-                  <TechCard key={tech.id} tech={tech} handleShowModalEdit={handleShowModalEdit} />
-               ))}
+               {user.techs.length ? (
+                  user.techs.map((tech) => (
+                     <TechCard key={tech.id} tech={tech} handleShowModalEdit={handleShowModalEdit} />
+                  ))
+               ) : (
+                  <TechCard tech={null} />
+               )}
             </ul>
          </DivContainer>
       </>

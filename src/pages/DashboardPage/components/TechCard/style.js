@@ -26,6 +26,15 @@ export const CardItem = styled.li`
 
    button {
       color: var(--white);
+      min-width: 13px;
+      min-height: 13px;
+
+      &::before {
+         right: -30%;
+         top: -30%;
+         width: 13px;
+         height: 13px;
+      }
    }
 
    button:hover {

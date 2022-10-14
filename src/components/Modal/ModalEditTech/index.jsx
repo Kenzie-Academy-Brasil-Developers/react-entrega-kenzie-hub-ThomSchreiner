@@ -45,8 +45,10 @@ export function ModalEditTech({ handleShowModalEdit }) {
                </button>
             </div>
             <form onSubmit={handleSubmit}>
-               <label htmlFor="title">Nome</label>
-               <input id="title" type="text" disabled defaultValue={tech.title} />
+               <label className="text three" htmlFor="title">
+                  Nome
+               </label>
+               <input className="text one" id="title" type="text" disabled defaultValue={tech.title} />
 
                <label className="text three" htmlFor="status">
                   Status

@@ -3,7 +3,7 @@ import { RiCheckboxBlankFill } from "react-icons/ri"
 
 export function Input({ className, name, type, placeholder, register, errors }) {
    const [namePtBr, nameEng] = name
-   console.log()
+
    return (
       <div className={className}>
          <label className="text three" htmlFor={nameEng}>
