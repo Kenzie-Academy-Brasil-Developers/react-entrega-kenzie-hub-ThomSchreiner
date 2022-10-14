@@ -1,53 +1,62 @@
-import { useContext } from "react"
+import { useContext, useEffect, useState } from "react"
 import { TechContext } from "../../../contexts/TechContext"
-import * as yup from "yup"
-import { useForm } from "react-hook-form"
-import { yupResolver } from "@hookform/resolvers/yup"
 import { StyledModal } from "../ModalContainer/modal"
 import { AiOutlineClose } from "react-icons/ai"
-import { StyledInput } from "../../Input/style"
 import { StyledButton } from "../../../style/button"
 import { Container } from "./style"
+import { toast } from "react-toastify"
 
-export function ModalAddTech({ handleShowModalAdd }) {
-   const { createTech } = useContext(TechContext)
+export function ModalEditTech({ handleShowModalEdit }) {
+   const { editTech } = useContext(TechContext)
+   const [isLoadingBtn, setIsLoadingBtn] = useState(false)
+   const [tech, setTech] = useState(null)
+   const [status, setStatus] = useState("")
 
-   const schema = yup.object({
-      title: yup.string().required("Tecnologia obrigatória!"),
-      status: yup.string().required("Status obrigatório!"),
-   })
-   const {
-      register,
-      handleSubmit,
-      formState: { errors },
-   } = useForm({ resolver: yupResolver(schema) })
+   async function handleSubmit(event) {
+      event.preventDefault()
+      if (status && status !== tech.status) {
+         setIsLoadingBtn(true)
+         await editTech({ status }, tech.id, handleShowModalEdit)
+         setIsLoadingBtn(false)
+      } else {
+         toast.warning("Escolha um status diferente do atual")
+      }
+   }
 
-   async function onSubmit(data) {
-      await createTech(data, handleShowModalAdd)
+   useEffect(() => {
+      setTech(JSON.parse(localStorage.getItem("@KenzieHubActualTech")))
+   }, [])
+
+   useEffect(() => {
+      tech && localStorage.removeItem("@KenzieHubActualTech")
+   }, [tech])
+
+   if (!tech) {
+      return null
    }
 
    return (
-      <StyledModal {...{ handleShowModalAdd }}>
+      <StyledModal handleShowModal={handleShowModalEdit}>
          <Container className="container small">
             <div>
                <h3 className="title three">Detalhes da Tecnologia</h3>
-               <button onClick={handleShowModalAdd} type="button">
+               <button onClick={handleShowModalEdit} type="button">
                   <AiOutlineClose />
                </button>
             </div>
-            <form onSubmit={handleSubmit(onSubmit)}>
-               <StyledInput
-                  name={["Nome", "title"]}
-                  type="text"
-                  placeholder="Escreva uma tecnologia"
-                  register={register}
-                  errors={errors}
-               />
+            <form onSubmit={handleSubmit}>
+               <label htmlFor="title">Nome</label>
+               <input id="title" type="text" disabled defaultValue={tech.title} />
 
                <label className="text three" htmlFor="status">
-                  Selecione o status
+                  Status
                </label>
-               <select className="text one" id="status" {...register("status")}>
+               <select
+                  onChange={(event) => setStatus(event.target.value)}
+                  className="text one"
+                  id="status"
+                  defaultValue={tech.status}
+               >
                   {["Iniciante", "Intermediário", "Avançado"].map((status) => (
                      <option key={status} value={status}>
                         {status}
@@ -55,8 +64,13 @@ export function ModalAddTech({ handleShowModalAdd }) {
                   ))}
                </select>
 
-               <StyledButton heigth="default" color="primary" type="submit">
-                  Cadastrar Tecnologia
+               <StyledButton
+                  className={isLoadingBtn ? "loading" : ""}
+                  heigth="default"
+                  color="primary"
+                  type="submit"
+               >
+                  Salvar alterações
                </StyledButton>
             </form>
          </Container>

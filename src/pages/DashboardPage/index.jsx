@@ -6,19 +6,24 @@ import { IoMdAdd } from "react-icons/io"
 import { StyledButton } from "../../style/button"
 import { ModalAddTech } from "../../components/Modal/ModalAddTech"
 import { TechCard } from "./components/TechCard"
+import { ModalEditTech } from "../../components/Modal/ModalEditTech"
 
 export function DashboardPage() {
    const { user } = useContext(UserContext)
    const [showModalAdd, setShowModalAdd] = useState(false)
-   // const [showModalRemove, setShowModalRemove] = useState(false)
+   const [showModalEdit, setShowModalEdit] = useState(false)
 
    function handleShowModalAdd() {
       setShowModalAdd(!showModalAdd)
+   }
+   function handleShowModalEdit() {
+      setShowModalEdit(!showModalEdit)
    }
 
    return (
       <>
          {showModalAdd && <ModalAddTech {...{ handleShowModalAdd }} />}
+         {showModalEdit && <ModalEditTech {...{ handleShowModalEdit }} />}
          <Header className="container">
             <h1 className="title one">Olá, {user.name}</h1>
             <p className="text three">{user.course_module}</p>
@@ -32,7 +37,7 @@ export function DashboardPage() {
             </div>
             <ul>
                {user.techs.map((tech) => (
-                  <TechCard key={tech.id} tech={tech} />
+                  <TechCard key={tech.id} tech={tech} handleShowModalEdit={handleShowModalEdit} />
                ))}
             </ul>
          </DivContainer>

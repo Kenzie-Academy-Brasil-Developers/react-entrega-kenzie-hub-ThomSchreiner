@@ -9,6 +9,8 @@ export const CardItem = styled.li`
    gap: 25px;
    background-color: var(--grey-4);
    border-radius: 4px;
+   cursor: pointer;
+   overflow-x: auto;
 
    &:hover {
       background-color: var(--grey-2);

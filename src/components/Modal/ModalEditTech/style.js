@@ -25,6 +25,15 @@ export const Container = styled.div`
       display: flex;
       flex-direction: column;
       gap: 24px;
+
+      input {
+         height: 48px;
+         padding: 0 16px;
+         color: var(--grey-1);
+         background-color: var(--grey-2);
+         border: 1px solid var(--grey-2);
+         border-radius: 4px;
+      }
    
       select {
          height: 48px;

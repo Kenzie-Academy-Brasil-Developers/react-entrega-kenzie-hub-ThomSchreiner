@@ -30,7 +30,7 @@ export function ModalAddTech({ handleShowModalAdd }) {
    }
 
    return (
-      <StyledModal {...{ handleShowModalAdd }}>
+      <StyledModal handleShowModal={handleShowModalAdd}>
          <Container className="container small">
             <div>
                <h3 className="title three">Cadastrar Tecnologia</h3>

@@ -31,5 +31,17 @@ export function TechProvider({ children }) {
       }
    }
 
-   return <TechContext.Provider value={{ createTech, removeTech }}>{children}</TechContext.Provider>
+   async function editTech(data, id, handleShowModalEdit) {
+      try {
+         await api.put(`/users/techs/${id}`, data)
+         const resp = await api.get("/profile")
+         setUser(resp.data)
+         toast.success("Tecnologia atualizada com sucesso!")
+         handleShowModalEdit()
+      } catch (error) {
+         toast.error(error.response.data.message)
+      }
+   }
+
+   return <TechContext.Provider value={{ createTech, removeTech, editTech }}>{children}</TechContext.Provider>
 }

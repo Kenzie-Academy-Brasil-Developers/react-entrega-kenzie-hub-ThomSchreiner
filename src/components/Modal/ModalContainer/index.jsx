@@ -1,6 +1,6 @@
-export function ModalContainer({ children, className, handleShowModalAdd }) {
+export function ModalContainer({ children, className, handleShowModal }) {
    function hiddenModal(event) {
-      event.target.className === className && handleShowModalAdd()
+      event.target.className === className && handleShowModal()
    }
 
    return (
