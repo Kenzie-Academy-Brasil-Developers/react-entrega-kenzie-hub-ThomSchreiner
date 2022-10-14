@@ -23,8 +23,7 @@ export function ModalAddTech({ handleShowModalAdd }) {
    } = useForm({ resolver: yupResolver(schema) })
 
    async function onSubmit(data) {
-      await createTech(data)
-      handleShowModalAdd()
+      await createTech(data, handleShowModalAdd)
    }
 
    return (

@@ -8,12 +8,13 @@ export const TechContext = createContext({})
 export function TechProvider({ children }) {
    const { setUser } = useContext(UserContext)
 
-   async function createTech(data) {
+   async function createTech(data, handleShowModalAdd) {
       try {
          await api.post("/users/techs", data)
          const resp = await api.get("/profile")
          setUser(resp.data)
          toast.success("Tecnologia adicionada com sucesso!")
+         handleShowModalAdd()
       } catch (error) {
          toast.error(error.response.data.message)
       }
