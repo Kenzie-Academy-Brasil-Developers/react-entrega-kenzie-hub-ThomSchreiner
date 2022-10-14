@@ -6,11 +6,12 @@ import { StyledInput } from "../../Input/style"
 import { StyledModal } from "../ModalContainer/modal"
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import { TechContext } from "../../../contexts/TechContext"
 
 export function ModalAddTech({ handleShowModalAdd }) {
    const { createTech } = useContext(TechContext)
+   const [isLoadingBtn, setIsLoadingBtn] = useState(false)
 
    const schema = yup.object({
       title: yup.string().required("Tecnologia obrigatória!"),
@@ -23,7 +24,9 @@ export function ModalAddTech({ handleShowModalAdd }) {
    } = useForm({ resolver: yupResolver(schema) })
 
    async function onSubmit(data) {
+      setIsLoadingBtn(true)
       await createTech(data, handleShowModalAdd)
+      setIsLoadingBtn(false)
    }
 
    return (
@@ -55,7 +58,12 @@ export function ModalAddTech({ handleShowModalAdd }) {
                   ))}
                </select>
 
-               <StyledButton heigth="default" color="primary" type="submit">
+               <StyledButton
+                  className={isLoadingBtn ? "loading" : ""}
+                  heigth="default"
+                  color="primary"
+                  type="submit"
+               >
                   Cadastrar Tecnologia
                </StyledButton>
             </form>

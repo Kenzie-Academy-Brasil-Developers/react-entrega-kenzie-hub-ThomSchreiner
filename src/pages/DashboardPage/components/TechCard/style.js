@@ -25,4 +25,11 @@ export const CardItem = styled.li`
    button {
       color: var(--white);
    }
+
+   button:hover {
+      transform: scale(1.2);
+   }
+   button:focus {
+      color: var(--primary-focus);
+   }
 `

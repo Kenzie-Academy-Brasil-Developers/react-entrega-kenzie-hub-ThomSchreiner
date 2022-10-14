@@ -13,16 +13,17 @@ const isLoggedStyle = {
          height:72px;
          position: fixed;
          inset: 0;
-         background-color: var(--grey-4);
-
+         
          &::before {
             content: "";
             width: 200vw;
-            height: 1px;
+            height: 100%;
             position: absolute;
             bottom: 0;
             left: -100vw;
-            background-color: var(--grey-3);
+            border-bottom: 1px solid var(--grey-3);
+            background-color: var(--grey-4);
+            z-index: -1;
          }
       }
 
