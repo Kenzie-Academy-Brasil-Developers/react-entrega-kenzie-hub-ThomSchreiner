@@ -33,7 +33,7 @@ export function UserProvider({ children }) {
       }
       getUser()
       // eslint-disable-next-line react-hooks/exhaustive-deps
-   }, [])
+   }, [isLogged])
 
    return (
       <UserContext.Provider value={{ user, setUser, isLogged, setIsLogged, isLoading }}>
