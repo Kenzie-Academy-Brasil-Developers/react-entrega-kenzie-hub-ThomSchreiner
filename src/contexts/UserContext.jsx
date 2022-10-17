@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from "react"
 import { useLocation, useNavigate } from "react-router-dom"
+import { toast } from "react-toastify"
 import { api } from "../services/api"
 
 export const UserContext = createContext({})
@@ -35,8 +36,18 @@ export function UserProvider({ children }) {
       // eslint-disable-next-line react-hooks/exhaustive-deps
    }, [isLogged])
 
+   async function registerUser(data) {
+      try {
+         await api.post("/users", data)
+         toast.success("Cadastro realizado com sucesso!")
+         navigate("/")
+      } catch (error) {
+         toast.error(error.response.data.message)
+      }
+   }
+
    return (
-      <UserContext.Provider value={{ user, setUser, isLogged, setIsLogged, isLoading }}>
+      <UserContext.Provider value={{ user, setUser, isLogged, setIsLogged, isLoading, registerUser }}>
          {children}
       </UserContext.Provider>
    )

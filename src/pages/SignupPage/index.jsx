@@ -4,16 +4,14 @@ import * as yup from "yup"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { DivContainer } from "./style"
 import { StyledInput } from "../../components/Input/style"
-import { api } from "./../../services/api"
-import { toast } from "react-toastify"
-import { useNavigate } from "react-router-dom"
 import { StyledButton } from "./../../style/button"
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
+import { UserContext } from "../../contexts/UserContext"
 
 export function SignupPage() {
-   const navigate = useNavigate()
    const [isActive, setIsActive] = useState(false)
    const [isLoadingBtn, setIsLoadingBtn] = useState(false)
+   const { registerUser } = useContext(UserContext)
 
    const schema = yup.object({
       name: yup.string().required("Nome obrigatório!"),
@@ -41,16 +39,9 @@ export function SignupPage() {
    } = useForm({ resolver: yupResolver(schema) })
 
    async function onSubmit(data) {
-      try {
-         setIsLoadingBtn(true)
-         await api.post("/users", data)
-         toast.success("Cadastro realizado com sucesso!")
-         navigate("/")
-      } catch (error) {
-         toast.error(error.response.data.message)
-      } finally {
-         setIsLoadingBtn(false)
-      }
+      setIsLoadingBtn(true)
+      await registerUser(data)
+      setIsLoadingBtn(false)
    }
 
    useEffect(() => {
