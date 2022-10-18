@@ -46,8 +46,22 @@ export function UserProvider({ children }) {
       }
    }
 
+   async function login(data) {
+      try {
+         const resp = await api.post("/sessions", data)
+         setUser(resp.data.user)
+         localStorage.setItem("@KenzieHubToken", resp.data.token)
+         localStorage.setItem("@KenzieHubUserId", resp.data.user.id)
+         setIsLogged(true)
+         toast.success("Login realizado com sucesso!")
+         navigate("/dashboard")
+      } catch (error) {
+         toast.error(error.response.data.message)
+      }
+   }
+
    return (
-      <UserContext.Provider value={{ user, setUser, isLogged, setIsLogged, isLoading, registerUser }}>
+      <UserContext.Provider value={{ user, setUser, isLogged, setIsLogged, isLoading, registerUser, login }}>
          {children}
       </UserContext.Provider>
    )
