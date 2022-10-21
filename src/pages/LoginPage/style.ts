@@ -21,7 +21,7 @@ export const DivContainer = styled.div`
       width: 100%;
       margin-bottom: 34px;
    }
-   
+
    span {
       text-align: center;
       margin-bottom: 22px;
@@ -37,8 +37,8 @@ export const DivContainer = styled.div`
       justify-content: center;
       border-radius: 4px;
       text-decoration: none;
-      
-      &:hover{
+
+      &:hover {
          background-color: var(--grey-2);
       }
    }

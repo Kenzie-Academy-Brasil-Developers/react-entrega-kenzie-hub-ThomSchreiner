@@ -33,5 +33,4 @@ export const DivContainer = styled.div`
       background-color: var(--grey-3);
       border-radius: 4px;
    }
-
 `

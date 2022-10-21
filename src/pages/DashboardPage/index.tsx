@@ -24,9 +24,9 @@ export function DashboardPage() {
       <>
          {showModalAdd && <ModalAddTech {...{ handleShowModalAdd }} />}
          {showModalEdit && <ModalEditTech {...{ handleShowModalEdit }} />}
-         <Header className="container">
-            <h1 className="title one">Olá, {user.name}</h1>
-            <p className="text three">{user.course_module}</p>
+         <Header page="dashboard" className="container">
+            <h1 className="title one">Olá, {user?.name}</h1>
+            <p className="text three">{user?.course_module}</p>
          </Header>
          <DivContainer className="container">
             <div>
@@ -36,12 +36,12 @@ export function DashboardPage() {
                </StyledButton>
             </div>
             <ul>
-               {user.techs.length ? (
+               {user?.techs.length ? (
                   user.techs.map((tech) => (
                      <TechCard key={tech.id} tech={tech} handleShowModalEdit={handleShowModalEdit} />
                   ))
                ) : (
-                  <TechCard tech={null} />
+                  <TechCard tech={null} handleShowModalEdit={handleShowModalEdit} />
                )}
             </ul>
          </DivContainer>

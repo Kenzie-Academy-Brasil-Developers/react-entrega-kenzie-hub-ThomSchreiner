@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react"
+import { FormEvent, useContext, useEffect, useState } from "react"
 import { TechContext } from "../../../contexts/TechContext"
 import { StyledModal } from "../ModalContainer/modal"
 import { AiOutlineClose } from "react-icons/ai"
@@ -6,15 +6,27 @@ import { StyledButton } from "../../../style/button"
 import { Container } from "./style"
 import { toast } from "react-toastify"
 
-export function ModalEditTech({ handleShowModalEdit }) {
+interface iModalEditTechProps {
+   handleShowModalEdit(): void
+}
+
+interface iTech {
+   created_at: string
+   id: string
+   status: string
+   title: string
+   updated_at: string
+}
+
+export function ModalEditTech({ handleShowModalEdit }: iModalEditTechProps) {
    const { editTech } = useContext(TechContext)
    const [isLoadingBtn, setIsLoadingBtn] = useState(false)
-   const [tech, setTech] = useState(null)
+   const [tech, setTech] = useState<iTech | null>(null)
    const [status, setStatus] = useState("")
 
-   async function handleSubmit(event) {
+   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
       event.preventDefault()
-      if (status && status !== tech.status) {
+      if (status && status !== tech?.status && tech) {
          setIsLoadingBtn(true)
          await editTech({ status }, tech.id, handleShowModalEdit)
          setIsLoadingBtn(false)
@@ -24,7 +36,7 @@ export function ModalEditTech({ handleShowModalEdit }) {
    }
 
    useEffect(() => {
-      setTech(JSON.parse(localStorage.getItem("@KenzieHubActualTech")))
+      setTech(JSON.parse(localStorage.getItem("@KenzieHubActualTech") as string))
    }, [])
 
    useEffect(() => {

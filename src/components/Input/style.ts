@@ -2,7 +2,6 @@ import styled from "styled-components"
 import { Input } from "."
 
 export const StyledInput = styled(Input)`
-
    label {
       display: inline-block;
       margin-bottom: 18px;
@@ -65,14 +64,14 @@ export const StyledInput = styled(Input)`
          top: 24%;
          transform: rotate(45deg);
          font-size: 16px;
-        
       }
 
-      input:focus + svg + span, input:focus + svg + span + svg {
+      input:focus + svg + span,
+      input:focus + svg + span + svg {
          display: inline-block;
       }
 
-      @media (max-width:768px) {
+      @media (max-width: 768px) {
          span {
             right: 0;
             top: -10px;

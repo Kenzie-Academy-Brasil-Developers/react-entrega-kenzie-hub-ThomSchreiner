@@ -7,7 +7,7 @@ import * as yup from "yup"
 import { StyledInput } from "../../components/Input/style"
 import { StyledButton } from "../../style/button"
 import { useContext, useState } from "react"
-import { UserContext } from "../../contexts/UserContext"
+import { iLoginUser, UserContext } from "../../contexts/UserContext"
 
 export function LoginPage() {
    const { login } = useContext(UserContext)
@@ -20,9 +20,9 @@ export function LoginPage() {
       register,
       handleSubmit,
       formState: { errors },
-   } = useForm({ resolver: yupResolver(schema) })
+   } = useForm<iLoginUser>({ resolver: yupResolver(schema) })
 
-   async function onSubmit(data) {
+   async function onSubmit(data: iLoginUser) {
       setIsLoadingBtn(true)
       await login(data)
       setIsLoadingBtn(false)
@@ -30,24 +30,27 @@ export function LoginPage() {
 
    return (
       <>
-         <Header loginPage="login" className="container small" />
+         <Header page="login" className="container small" />
          <DivContainer className="container small">
             <h3 className="title three">Login</h3>
             <form onSubmit={handleSubmit(onSubmit)}>
                <StyledInput
-                  name={["Email", "email"]}
+                  label="Email"
+                  name="email"
                   type="email"
                   placeholder="Digite seu email"
-                  register={register}
-                  errors={errors}
+                  register={register("email")}
+                  errors={errors.email}
                />
                <StyledInput
-                  name={["Senha", "password"]}
+                  label="Senha"
+                  name="password"
                   type="password"
                   placeholder="Digite sua senha"
-                  register={register}
-                  errors={errors}
+                  register={register("password")}
+                  errors={errors.password}
                />
+
                <StyledButton
                   className={isLoadingBtn ? "loading" : ""}
                   color="primary"

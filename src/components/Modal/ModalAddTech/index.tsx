@@ -7,9 +7,13 @@ import { StyledModal } from "../ModalContainer/modal"
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
 import { useContext, useState } from "react"
-import { TechContext } from "../../../contexts/TechContext"
+import { iCreateTechData, TechContext } from "../../../contexts/TechContext"
 
-export function ModalAddTech({ handleShowModalAdd }) {
+interface iModalAddTech {
+   handleShowModalAdd(): void
+}
+
+export function ModalAddTech({ handleShowModalAdd }: iModalAddTech) {
    const { createTech } = useContext(TechContext)
    const [isLoadingBtn, setIsLoadingBtn] = useState(false)
 
@@ -21,9 +25,9 @@ export function ModalAddTech({ handleShowModalAdd }) {
       register,
       handleSubmit,
       formState: { errors },
-   } = useForm({ resolver: yupResolver(schema) })
+   } = useForm<iCreateTechData>({ resolver: yupResolver(schema) })
 
-   async function onSubmit(data) {
+   async function onSubmit(data: iCreateTechData) {
       setIsLoadingBtn(true)
       await createTech(data, handleShowModalAdd)
       setIsLoadingBtn(false)
@@ -40,11 +44,12 @@ export function ModalAddTech({ handleShowModalAdd }) {
             </div>
             <form onSubmit={handleSubmit(onSubmit)}>
                <StyledInput
-                  name={["Nome", "title"]}
+                  label="Nome"
+                  name="title"
                   type="text"
                   placeholder="Escreva uma tecnologia"
-                  register={register}
-                  errors={errors}
+                  register={register("title")}
+                  errors={errors.title}
                />
 
                <label className="text three" htmlFor="status">

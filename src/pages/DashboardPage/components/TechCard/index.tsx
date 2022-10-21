@@ -1,14 +1,22 @@
-import { useContext, useState } from "react"
+import { useContext, useState, MouseEvent } from "react"
 import { FaRegTrashAlt } from "react-icons/fa"
 import { TechContext } from "../../../../contexts/TechContext"
+import { iTechs } from "../../../../contexts/UserContext"
 import { CardItem } from "./style"
 
-export function TechCard({ tech, handleShowModalEdit }) {
+interface iTechCardProps {
+   tech: iTechs | null
+   handleShowModalEdit(): void
+}
+
+export function TechCard({ tech, handleShowModalEdit }: iTechCardProps) {
+   console.log(tech)
    const { removeTech } = useContext(TechContext)
    const [isLoadingBtn, setIsLoadingBtn] = useState(false)
 
-   function handleEditTech(event) {
-      if (event.target.closest("BUTTON")?.tagName !== "BUTTON") {
+   function handleEditTech(event: MouseEvent) {
+      const target = event.target as HTMLElement
+      if (target?.closest("BUTTON")?.tagName !== "BUTTON") {
          localStorage.setItem("@KenzieHubActualTech", JSON.stringify(tech))
          handleShowModalEdit()
       }
@@ -16,7 +24,7 @@ export function TechCard({ tech, handleShowModalEdit }) {
 
    async function handleRemoveTech() {
       setIsLoadingBtn(true)
-      await removeTech(tech.id)
+      await removeTech(tech?.id as string)
       setIsLoadingBtn(false)
    }
 

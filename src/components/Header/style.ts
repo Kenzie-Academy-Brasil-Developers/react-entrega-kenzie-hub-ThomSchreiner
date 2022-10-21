@@ -1,7 +1,12 @@
-import styled, { css } from "styled-components";
+import styled, { css } from "styled-components"
+import { tPage } from "."
+
+interface iStyledHeaderProps {
+   page: tPage
+}
 
 const isLoggedStyle = {
-   true: css`
+   dashboard: css`
       height: 190px;
       border-bottom: 1px solid var(--grey-3);
 
@@ -9,11 +14,11 @@ const isLoggedStyle = {
          padding-top: 72px;
       }
 
-      nav { 
-         height:72px;
+      nav {
+         height: 72px;
          position: fixed;
          inset: 0;
-         
+
          &::before {
             content: "";
             width: 200vw;
@@ -27,21 +32,28 @@ const isLoggedStyle = {
          }
       }
 
-      .header_children { height: 118px; }
+      .header_children {
+         height: 118px;
+      }
    `,
    login: css`
-      nav ul { display: none; }
-      nav { justify-content: center; }
-   `
+      nav ul {
+         display: none;
+      }
+      nav {
+         justify-content: center;
+      }
+   `,
+   signup: "",
 }
 
-export const StyledHeader = styled.header`
-    height: 72px;
+export const StyledHeader = styled.header<iStyledHeaderProps>`
+   height: 72px;
 
    & > div {
       height: 100%;
    }
-   
+
    nav {
       height: 100%;
       display: flex;
@@ -64,5 +76,5 @@ export const StyledHeader = styled.header`
       }
    }
 
-   ${({ isLogged, loginPage }) => loginPage ? isLoggedStyle["login"] : isLoggedStyle[isLogged]}
+   ${({ page }) => isLoggedStyle[page]}
 `

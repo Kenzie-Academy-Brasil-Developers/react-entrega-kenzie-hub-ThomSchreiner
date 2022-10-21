@@ -1,11 +1,11 @@
-import styled from "styled-components";
+import styled from "styled-components"
 
 export const Container = styled.div`
    background-color: var(--grey-3);
    box-shadow: 0px 4px 40px -10px var(--shadow);
    border-radius: 4px;
    color: var(--grey-0);
-   
+
    & > div {
       display: flex;
       justify-content: space-between;
@@ -26,15 +26,6 @@ export const Container = styled.div`
       flex-direction: column;
       gap: 24px;
 
-      input {
-         height: 48px;
-         padding: 0 16px;
-         color: var(--grey-1);
-         background-color: var(--grey-2);
-         border: 1px solid var(--grey-2);
-         border-radius: 4px;
-      }
-   
       select {
          height: 48px;
          padding: 0 16px;

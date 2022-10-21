@@ -1,24 +1,24 @@
-import { useContext } from "react"
+import { ReactNode, useContext } from "react"
 import { useNavigate } from "react-router-dom"
 import logo from "../../assets/Logo.svg"
 import { UserContext } from "../../contexts/UserContext"
 import { StyledButton } from "../../style/button"
 import { StyledHeader } from "./style"
 
-export function Header({ loginPage, className, children }) {
-   const { isLogged, setIsLogged, setUser } = useContext(UserContext)
+export type tPage = "login" | "signup" | "dashboard"
+
+interface iHeaderProps {
+   page: tPage
+   className: "container small" | "container"
+   children?: ReactNode
+}
+
+export function Header({ page, className, children }: iHeaderProps) {
+   const { isLogged, logOut } = useContext(UserContext)
    const navigate = useNavigate()
 
-   function logOut() {
-      setIsLogged(false)
-      localStorage.removeItem("@KenzieHubToken")
-      localStorage.removeItem("@KenzieHubUserId")
-      setUser(null)
-      navigate("/", { replace: true })
-   }
-
    return (
-      <StyledHeader isLogged={isLogged} loginPage={loginPage}>
+      <StyledHeader page={page}>
          <div className={className}>
             <nav className={isLogged ? className : ""}>
                <img src={logo} alt="Logo Kenzie Hub" />

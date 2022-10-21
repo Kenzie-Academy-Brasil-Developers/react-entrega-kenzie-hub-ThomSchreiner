@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "styled-components"
 
 export const CardItem = styled.li`
    height: 50px;
@@ -14,8 +14,10 @@ export const CardItem = styled.li`
 
    &:hover {
       background-color: var(--grey-2);
-      
-      p + p { color: var(--grey-0); }
+
+      p + p {
+         color: var(--grey-0);
+      }
    }
 
    p + p {
