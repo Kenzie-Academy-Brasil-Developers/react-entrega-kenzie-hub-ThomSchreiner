@@ -10,7 +10,6 @@ interface iTechCardProps {
 }
 
 export function TechCard({ tech, handleShowModalEdit }: iTechCardProps) {
-   console.log(tech)
    const { removeTech } = useContext(TechContext)
    const [isLoadingBtn, setIsLoadingBtn] = useState(false)
 
